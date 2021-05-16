@@ -1,0 +1,13 @@
+.example-table {
+  width: 100%;
+  min-width: 0;
+}
+
+.name {
+  color: var(--primary-color);
+}
+
+.paginator {
+  align-self: center;
+  display: flex;
+}

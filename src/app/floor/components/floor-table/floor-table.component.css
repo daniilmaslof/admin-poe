@@ -1,0 +1,11 @@
+.mat-column-visibility {
+  flex: none;
+  width: 120px;
+}
+.mat-column-name {
+  flex: 1;
+}
+
+.visibility-icon.mat-accent {
+  color: #CCCCCC;
+}

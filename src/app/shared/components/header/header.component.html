@@ -1,0 +1,27 @@
+<div class="header">
+  <div class="logo">
+    Logo
+  </div>
+  <div class="links">
+    <button class="link-button" color="primary" mat-icon-button aria-label="Help">
+      <mat-icon>help</mat-icon>
+      Help
+    </button>
+    <button class="link-button" color="primary" mat-icon-button aria-label="Admin">
+      <mat-icon>person</mat-icon>
+      Admin
+    </button>
+  </div>
+</div>
+<div class="nav-list">
+  <button type="button" *ngFor="let item of mainScreenNavLinks"
+          class="nav-link-button"
+          mat-button
+          color="accent"
+          [routerLink]="item.url"
+          routerLinkActive="active-button">
+    <div class="mat-title">
+      {{ item.title }}
+    </div>
+  </button>
+</div>

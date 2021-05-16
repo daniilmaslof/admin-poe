@@ -1,0 +1,180 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+@import './variables';
+@import './style-reset.admin-theme';
+@import './src/app/shared/components/header/header.admin-theme';
+@include mat-core();
+
+$admin-primary-palette: (
+  50 : #F9FBFC,
+  100 : #d1dffa,
+  200 : #b2caf6,
+  300 : #93b5f2,
+  400 : #7ba5f0,
+  500 : #6495ed,
+  600 : #5c8deb,
+  700 : #5282e8,
+  800 : #4878e5,
+  900 : #3667e0,
+  A100 : #ffffff,
+  A200 : #f6f8ff,
+  A400 : #c3d3ff,
+  A700 : #a9c0ff,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #000000,
+    600 : #000000,
+    700 : #000000,
+    800 :  #000000,
+    900 :  #000000,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+
+$admin-accent-palette: (
+  50 : #fafafa,
+  100 : #f4f4f4,
+  200 : #ececec,
+  300 : #e4e4e4,
+  400 : #E0E0E0,
+  500 : #d9d9d9,
+  600 : #d5d5d5,
+  700 : #cfcfcf,
+  800 : #cacaca,
+  900 : #BDBDBD,
+  A100 : #ffffff,
+  A200 : #ffffff,
+  A400 : #ffffff,
+  A700 : #ffffff,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #000000,
+    600 : #000000,
+    700 : #000000,
+    800 : #000000,
+    900 : #000000,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+
+$admin-warn-palette: (
+  50 : #fee7e7,
+  100 : #fcc2c2,
+  200 : #fa9a9a,
+  300 : #f77272,
+  400 : #f65353,
+  500 : #f43535,
+  600 : #f33030,
+  700 : #f12828,
+  800 : #ef2222,
+  900 : #ec1616,
+  A100 : #ffffff,
+  A200 : #ffe9e9,
+  A400 : #ffb6b6,
+  A700 : #ff9c9c,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #000000,
+    600 :  #000000,
+    700 : #000000,
+    800 : #000000,
+    900 :  #000000,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+$admin-theme-background: (
+  status-bar: map_get($mat-grey, 300),
+  app-bar: map_get($mat-grey, 100),
+  background: map_get($mat-grey, 50),
+  hover: rgba(black, 0.04),
+  card: white,
+  dialog: white,
+  disabled-button: rgba(black, 0.12),
+  raised-button: white,
+  focused-button: $dark-focused,
+  selected-button: map_get($mat-grey, 300),
+  selected-disabled-button: map_get($mat-grey, 400),
+  disabled-button-toggle: map_get($mat-grey, 200),
+  unselected-chip: map_get($mat-grey, 300),
+  disabled-list-option: map_get($mat-grey, 200),
+);
+
+$admin-theme-foreground: (
+  base: black,
+  divider: $divider-color,
+  dividers: $dark-dividers,
+  disabled: $dark-disabled-text,
+  disabled-button: #CCCCCC,
+  disabled-text: $dark-disabled-text,
+  elevation: black,
+  hint-text: $dark-disabled-text,
+  secondary-text: #CCCCCC,
+  icon: rgba(black, 0.54),
+  icons: rgba(black, 0.54),
+  text: $primary-color,
+  slider-min: rgba(black, 0.87),
+  slider-off: rgba(black, 0.26),
+  slider-off-active: rgba(black, 0.38),
+);
+$admin-primary: mat-palette($admin-primary-palette);
+$admin-accent: mat-palette($admin-accent-palette, $text: black);
+
+// The warn palette is optional (defaults to red).
+$admin-warn: mat-palette($admin-warn-palette);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$admin-theme: (
+  primary: $admin-primary,
+  accent: $admin-accent,
+  warn: $admin-warn,
+  is-dark: false,
+  foreground: $admin-theme-foreground,
+  background: $admin-theme-background,
+);
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($admin-theme);
+
+@mixin custom-components-theme($admin-theme) {
+  @include admin-styles-reset-theme($admin-theme);
+  @include admin-header-theme($admin-theme);
+}
+
+@include custom-components-theme($admin-theme);
+
+$web-typography: mat-typography-config(
+  $title: mat-typography-level(16px, 18.75px, 500, $primary-font-family),
+  $button: mat-typography-level(14px, 16.41px, 500, $primary-font-family),
+  $subheading-1: mat-typography-level(16px, 21px, 600, $primary-font-family),
+  $body-2: mat-typography-level(14px, 14px, 500, $primary-font-family),
+  $body-1: mat-typography-level(14px, 14px, 400, $primary-font-family),
+  $headline: mat-typography-level(30px, 37px, bold, $primary-font-family, -0.21px),
+  $caption: mat-typography-level(13px, 18px, 400)
+);
+
+
+@include angular-material-typography($web-typography);

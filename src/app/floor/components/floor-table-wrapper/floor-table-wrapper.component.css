@@ -1,0 +1,21 @@
+.container {
+  padding-left: 140px;
+  width: calc(100% - 140px);
+  height: 100%;
+  background-color: #F9FBFC;
+  display: flex;
+}
+
+.table {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.header {
+  background-color: #F9FBFC;
+  width: calc(100% - 160px);
+  height: 55px;
+  display: flex;
+  align-items: center;
+  padding-left: 160px;
+}

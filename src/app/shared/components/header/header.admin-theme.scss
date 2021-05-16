@@ -1,0 +1,23 @@
+@import '~@angular/material/theming';
+
+@mixin admin-header-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  .nav-list {
+    .nav-link-button {
+      border-radius: 0;
+      background-color: mat-color($accent, 400);
+    }
+    .nav-link-button:nth-child(odd) {
+      background-color: mat-color($accent, 500);
+    }
+    .nav-link-button.active-button {
+      background-color: mat-color($accent, 900);
+    }
+  }
+  .logo {
+    background-color: mat-color($accent, 500);
+  }
+
+}

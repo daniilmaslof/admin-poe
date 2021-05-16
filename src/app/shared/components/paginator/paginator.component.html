@@ -1,0 +1,7 @@
+<button (click)="prev()" [disabled]="prevPageDisabled" mat-stroked-button color="primary">Previous</button>
+<div class="pagination">
+  <button (click)="first()" [disabled]="prevPageDisabled" class="cell" mat-button>&laquo;</button>
+  <button (click)="goTo(page.index)" [class.selected]="page.selected" class="cell" mat-button *ngFor="let page of pages$ | async">{{ page.index }}</button>
+  <button (click)="last()" [disabled]="nextPageDisabled" class="cell" mat-button>&raquo;</button>
+</div>
+<button (click)="next()" [disabled]="nextPageDisabled" mat-stroked-button color="primary">Next</button>

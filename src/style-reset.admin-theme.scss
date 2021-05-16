@@ -1,0 +1,77 @@
+@import '~@angular/material/theming';
+@import './variables';
+
+@mixin admin-styles-reset-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .no-items-row {
+    background-color: mat-color($primary, 50);
+    width: 100%;
+    text-align: center;
+    align-self: flex-start;
+  }
+  .mat-title.mat-title {
+    margin: 0;
+  }
+
+  .small-radio-group {
+    .mat-radio-container {
+      height: 14px;
+      width: 14px;
+    }
+
+    .mat-radio-outer-circle {
+      height: 14px;
+      width: 14px;
+    }
+
+    .mat-radio-inner-circle {
+      height: 14px;
+      width: 14px;
+    }
+
+    .mat-radio-button .mat-radio-ripple {
+      height: 28px; /*double of your required circle radius*/
+      width: 28px; /*double of your required circle radius*/
+      left: calc(50% - 14px); /*'10px'-same as your required circle radius*/
+      top: calc(50% - 14px); /*'10px'-same as your required circle radius*/
+    }
+  }
+  .search-input {
+    .mat-icon {
+      color: mat-color($accent, 900);
+    }
+
+    &.mat-form-field-appearance-outline .mat-form-field-outline {
+      color: mat-color($accent, 500);
+    }
+
+    &.mat-form-field.mat-form-field .mat-form-field-label {
+      color: mat-color($accent, 900);
+    }
+
+    &.mat-form-field.mat-form-field.mat-form-field-should-float .mat-form-field-label {
+      color: mat-color($foreground, text, 0.87);
+    }
+
+    &.mat-form-field-appearance-outline.mat-form-field-appearance-outline .mat-form-field-infix {
+      padding: 5px 0 5px 0;
+    }
+
+    &.mat-form-field-appearance-outline:not(.mat-form-field-should-float) .mat-form-field-label {
+      top: calc(1.84375em - 7.5px);
+    }
+
+    &.mat-form-field-appearance-outline .mat-form-field-wrapper {
+      margin: 0;
+    }
+  }
+
+  .mat-header-cell {
+    color: black;
+  }
+}

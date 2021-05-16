@@ -1,0 +1,31 @@
+.nav-link-button {
+  max-width: 240px;
+  height: 36px;
+  flex: 1;
+}
+.nav-list {
+  display: flex;
+}
+
+.logo {
+  width: 74px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 74px;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+.link-button {
+  min-width: 50px;
+  font-size: 12px;
+}
+.link-button:first-child {
+  margin-right: 15px;
+}
+.links {
+  align-self: center;
+}
