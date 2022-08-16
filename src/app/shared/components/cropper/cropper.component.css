@@ -1,0 +1,48 @@
+:host{
+  width: 690px;
+  max-height: 690px;
+  display: block;
+}
+.dialog-title {
+  background: #F2F2F2;
+  height: 40px;
+  display: flex;
+  font-size: 14px;
+  color: #828282;
+  text-transform: uppercase;
+  font-weight: 500;
+  justify-content: center;
+  align-items: center;
+}
+.title {
+  font-size: 24px;
+  text-align: center;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 24px;
+  margin: auto;
+  width: 328px;
+}
+
+.container, .actions {
+  max-width: 400px;
+  max-height: 400px;
+  margin: auto;
+}
+
+.actions {
+  display: flex;
+}
+.actions {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+.actions > * {
+  flex: 1;
+}
+
+.actions :first-child {
+  margin-right: 20px;
+}

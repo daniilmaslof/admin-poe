@@ -1,0 +1,19 @@
+<ng-container *ngIf="fileModel$ | async as fileModel">
+  <div class="container">
+    <img class="image" [src]="fileModel.url">
+  </div>
+  <div class="progress-content" *ngIf="progress$ | async as progress; else uploadedFile">
+    <div class="progress-header">
+      <div class="name">{{fileModel.name}}</div>
+      <div class="size" *ngIf="file$ | async as file">{{file.size * progress | appFormatFileSize}}
+        / {{file.size | appFormatFileSize}}</div>
+    </div>
+    <mat-progress-bar [value]="progress"></mat-progress-bar>
+  </div>
+  <ng-template #uploadedFile>
+    <div class="file">
+      <div class="name">{{fileModel.fileName}}</div>
+      <div class="extension">.{{fileModel.fileExtension}}</div>
+    </div>
+  </ng-template>
+</ng-container>

@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild } from '@angular/core';
+import { LocationTableWrapperComponent } from './location-table-wrapper/location-table-wrapper.component';
 
 @Component({
   selector: 'app-location',
@@ -8,8 +9,17 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 })
 export class LocationComponent implements OnInit {
 
+  @ViewChild(LocationTableWrapperComponent)
+  locationTableWrapperComponent: LocationTableWrapperComponent
   constructor() { }
 
+  public canDeactivate() {
+     if(this.locationTableWrapperComponent.touchedLocation$.value.length) {
+       return true
+     } else {
+       return false;
+     }
+  }
   ngOnInit(): void {
   }
 

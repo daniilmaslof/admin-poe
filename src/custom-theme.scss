@@ -5,6 +5,7 @@
 @import './variables';
 @import './style-reset.admin-theme';
 @import './src/app/shared/components/header/header.admin-theme';
+@import './src/app/location/components/location/poi-dialog/poi-dialog.theme';
 @include mat-core();
 
 $admin-primary-palette: (
@@ -161,6 +162,7 @@ $admin-theme: (
 
 @mixin custom-components-theme($admin-theme) {
   @include admin-styles-reset-theme($admin-theme);
+  @include poi-dialog($admin-theme);
   @include admin-header-theme($admin-theme);
 }
 

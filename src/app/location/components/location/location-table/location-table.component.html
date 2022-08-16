@@ -1,14 +1,25 @@
-<mat-table [dataSource]="locationsData" class="example-table" matSort (matSortChange)="sortChanged.emit($event)" matSortActive="created" matSortDisableClear matSortDirection="desc">
+<mat-table [dataSource]="locationList" [multiTemplateDataRows]="true" class="example-table without-border-width" matSort
+           (matSortChange)="sortChanged.emit($event)" matSortActive="created" matSortDisableClear
+           matSortDirection="desc">
   <!-- Number Column -->
   <ng-container matColumnDef="action">
     <mat-header-cell *matHeaderCellDef></mat-header-cell>
     <mat-cell class="name" *matCellDef="let row">
-      <app-selected-location-checkbox [location]="row"></app-selected-location-checkbox>
+      <app-selected-location-checkbox (click)="$event.stopPropagation();" [location]="row"></app-selected-location-checkbox>
     </mat-cell>
   </ng-container>
   <ng-container matColumnDef="name">
     <mat-header-cell mat-sort-header *matHeaderCellDef>Name</mat-header-cell>
-    <mat-cell class="name" *matCellDef="let row">{{row.name}}</mat-cell>
+    <mat-cell class="name" *matCellDef="let row">
+      <div class="name-cell">
+        <button (click)="openPoiDialog(row);$event.stopPropagation()" class="link-primary-button">{{row.name}}</button>
+        <div *ngIf="row.isEnableExpanded" class="sub-title-container">
+          <div *ngIf="!row.isExpanded" class="rectangle-bottom"></div>
+          <div *ngIf="row.isExpanded" class="rectangle-top"></div>
+          <span class="sub-title">Show {{row.locations.length}} members</span>
+        </div>
+      </div>
+    </mat-cell>
   </ng-container>
 
   <!-- Title Column -->
@@ -20,9 +31,10 @@
   <!-- State Column -->
   <ng-container matColumnDef="isActivate">
     <mat-header-cell mat-sort-header *matHeaderCellDef>Activate</mat-header-cell>
-    <mat-cell *matCellDef="let row">
+    <mat-cell (click)="$event.stopPropagation()" *matCellDef="let row">
       <mat-slide-toggle
         (change)="changeActivate($event.checked, row)"
+        [class.is-poi]="row.poi"
         color="primary"
         class="example-margin"
         [checked]="row.active">
@@ -35,13 +47,13 @@
     <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
       Floor
     </mat-header-cell>
-    <mat-cell *matCellDef="let row">{{row.floor}}</mat-cell>>
+    <mat-cell [class.disabled]="(disabledFloors$ | async)?.includes(row.floor)" *matCellDef="let row">{{toReadable(row.floor)}}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="area">
     <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
       Area
-    </mat-header-cell>>
+    </mat-header-cell>
     <mat-cell *matCellDef="let row">{{row.area}}</mat-cell>
   </ng-container>
 
@@ -55,10 +67,88 @@
   <ng-container matColumnDef="archNumber">
     <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
       Arch'l №
-    </mat-header-cell>>
-    <mat-cell *matCellDef="let row">{{row.archId}}</mat-cell>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.archId2}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="expandedTable">
+    <mat-cell [@expandableRow]="poi.isExpanded ? 'expanded' : 'collapsed'" [attr.colspan]="displayedColumns.length" *matCellDef="let poi">
+      <mat-table class="expanded-table" [dataSource]="poi.locations">
+        <ng-container matColumnDef="action">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell class="name" *matCellDef="let row">
+            <app-selected-location-checkbox [location]="row"></app-selected-location-checkbox>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+          <mat-cell class="name" *matCellDef="let row">
+            <div class="name-cell">
+              <button (click)="openPoiDialog(row, poi)" class="link-primary-button">{{row.name}}</button>
+              <div *ngIf="row.isEnableExpanded" class="sub-title-container">
+                <div *ngIf="!row.isExpanded" class="rectangle-bottom"></div>
+                <div *ngIf="row.isExpanded" class="rectangle-top"></div>
+                <span class="sub-title">Show {{row.locations.length}} members</span>
+              </div>
+            </div>
+          </mat-cell>
+        </ng-container>
+
+        <!-- Title Column -->
+        <ng-container matColumnDef="type">
+          <mat-header-cell *matHeaderCellDef>Type</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.type}}</mat-cell>
+        </ng-container>
+
+        <!-- State Column -->
+        <ng-container matColumnDef="isActivate">
+          <mat-header-cell *matHeaderCellDef>Activate</mat-header-cell>
+          <mat-cell   *matCellDef="let row">
+            <mat-slide-toggle
+              (change)="changeActivate($event.checked, row);"
+              color="primary"
+              class="is-poi"
+              [checked]="row.active">
+            </mat-slide-toggle>
+          </mat-cell>
+        </ng-container>
+
+        <!-- Created Column -->
+        <ng-container matColumnDef="floor">
+          <mat-header-cell *matHeaderCellDef>
+            Floor
+          </mat-header-cell>
+          <mat-cell [class.disabled]="(disabledFloors$ | async)?.includes(row.floor)" *matCellDef="let row">{{toReadable(row.floor)}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="area">
+          <mat-header-cell *matHeaderCellDef>
+            Area
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.area}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="category">
+          <mat-header-cell *matHeaderCellDef>
+            Category
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.category}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="archNumber">
+          <mat-header-cell *matHeaderCellDef>
+            Arch'l №
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.archId}}</mat-cell>
+        </ng-container>
+        <mat-row *matRowDef="let element; columns: displayedColumns;">
+        </mat-row>
+      </mat-table>
+    </mat-cell>
   </ng-container>
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  <mat-row (click)="element.isExpanded = !element.isExpanded" *matRowDef="let element; columns: displayedColumns;"
+           [class.student-expanded-row]="element.isEnableExpanded">
+  </mat-row>
+  <mat-row *matRowDef="let row; columns: expandedColumns;" class="expandable-row"></mat-row>
 </mat-table>
 

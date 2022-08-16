@@ -1,0 +1,27 @@
+<div *ngIf="(isInvalidControl$ | async) && control.touched" class="error-container">
+  <div class="error" *ngIf="control.hasError('httpError')">
+    {{control.errors['httpError']}}
+  </div>
+  <div class="error" *ngIf="control.hasError('required')">
+    This field is required
+  </div>
+  <div class="error" *ngIf="control.hasError('email')">
+    Please enter a valid email
+  </div>
+  <div class="error" *ngIf="control.hasError('min')">
+    Should not be less than {{control.errors['min']?.min}} characters
+  </div>
+  <div class="error" *ngIf="control.hasError('max')">
+    Should not be more than {{control.errors['max']?.max}} characters
+  </div>
+  <div class="error" *ngIf="control.hasError('minlength')">
+    This field must be at least {{control.errors['minlength']?.requiredLength}} characters
+  </div>
+  <div class="error" *ngIf="control.hasError('maxlength')">
+    This field must be less than {{control.errors['maxlength']?.requiredLength}} characters
+  </div>
+  <ng-container *ngIf="control.hasError('serverErrors')">
+    <div class="error" *ngFor="let error of control.errors['serverErrors']">{{error}}</div>
+  </ng-container>
+  <ng-content></ng-content>
+</div>

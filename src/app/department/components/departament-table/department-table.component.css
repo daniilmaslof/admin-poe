@@ -1,0 +1,14 @@
+.mat-column-action {
+  max-width: 30px;
+}
+mat-header-row {
+   min-height: 50px;
+}
+
+.mat-column-name {
+  max-width: 350px;
+}
+
+.link-primary-button {
+  font-weight: 400;
+}

@@ -1,0 +1,85 @@
+<form [formGroup]="form">
+  <mat-tab-group [class.location]="!form.value.poi" mat-align-tabs="start">
+    <mat-tab [label]="'Category'">
+      <div class="container">
+        <div class="title">
+          {{form.value?.name}}
+        </div>
+        <div class="form">
+          <div class="row">
+            <div class="cell name-cell big-cell">
+              <label class="label">Name</label>
+              <mat-form-field class="small-mat-form-field" appearance="outline">
+                <textarea formControlName="name" matTextareaAutosize matAutosizeMaxRows="3" matInput></textarea>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Locations">
+      <div class="content">
+        <div class="header">
+          <div class="row">
+            <div class="table-title title">
+              {{form.value.name}}
+            </div>
+          </div>
+        </div>
+        <div class="section">
+          <mat-progress-bar mode="indeterminate" *ngIf="isLoading$ | async"></mat-progress-bar>
+          <mat-table class="table" *ngIf="form.value?.locations?.length else noLocations" [dataSource]="form.get('locations').value">
+            <!-- Number Column -->
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+              <mat-cell class="name" *matCellDef="let row">{{row.name}}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="archNumber">
+              <mat-header-cell *matHeaderCellDef>
+                Arch'l №
+              </mat-header-cell>
+              <mat-cell *matCellDef="let row">{{row.archId}}</mat-cell>
+            </ng-container>
+
+            <!-- State Column -->
+            <ng-container matColumnDef="isActivate">
+              <mat-header-cell *matHeaderCellDef></mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                <mat-slide-toggle
+                  (change)="row.active = $event.checked"
+                  color="primary"
+                  class="is-poi"
+                  [checked]="row.active">
+                </mat-slide-toggle>
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="remove">
+              <mat-header-cell *matHeaderCellDef></mat-header-cell>
+              <mat-cell *matCellDef="let row;let i = index">
+                <button (click)="removeLocation(i)" color="primary" mat-icon-button>
+                  <mat-icon svgIcon="delete"></mat-icon>
+                </button>
+              </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+          <ng-template #noLocations>
+            <div class="no-locations">
+              This category does not contain a location
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+  <div class="actions">
+    <button [disabled]="isLoading$ | async" (click)="save()" class="action-button save-button" mat-raised-button color="primary">
+      <ng-container *ngIf="data else create">Save</ng-container>
+      <ng-template #create>Create</ng-template>
+    </button>
+    <button (click)="dialogRef.close()" mat-stroked-button class="action-button" color="primary">Cancel</button>
+  </div>
+</form>

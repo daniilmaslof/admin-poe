@@ -1,0 +1,20 @@
+<div class="dialog-title">
+  Selecting a photo POI
+</div>
+<div class="title">
+  The selected area of the photo
+  will be shown on this POI
+</div>
+<div class="container">
+  <image-cropper
+    [maintainAspectRatio]="true"
+    [aspectRatio]="1"
+    [imageBase64]="data.url"
+    format="png"
+    (imageCropped)="imageCropped($event)"
+  ></image-cropper>
+</div>
+<div class="actions">
+  <button (click)="save()"  mat-raised-button color="primary">Add</button>
+  <button (click)="dialogRef.close()" mat-stroked-button color="primary">Cancel</button>
+</div>

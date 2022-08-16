@@ -1,0 +1,81 @@
+.image {
+  width: 50px;
+  height: 50px;
+}
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+
+.field-container {
+  min-width: 0;
+}
+
+.field-container {
+  display: flex;
+  width: 100%;
+}
+
+.field-container {
+  padding: 14px;
+}
+
+.icon-column, .action-column {
+  flex-shrink: 0;
+}
+
+.action-column {
+  margin-left: 15px;
+}
+
+.icon-column {
+  display: flex;
+  align-items: center;
+}
+
+
+.field-container {
+  border-radius: 4px;
+}
+
+.action-column .only-icon-button {
+  font-size: 1rem;
+  --padding-start: 4px;
+  --padding-end: 4px;
+}
+
+.size {
+  flex-shrink: 0;
+}
+.name, .file {
+  white-space: nowrap;
+  align-self: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+.file {
+  flex: 1;
+}
+.file {
+  display: flex;
+}
+.extension {
+  flex-shrink: 0;
+}
+.progress-header {
+  display: flex;
+  width: 100%;
+}
+
+.progress-header {
+  justify-content: space-between;
+}
+
+.progress-content, .progress-header {
+  min-width: 0;
+}
+.progress-header {
+  justify-content: space-between;
+}

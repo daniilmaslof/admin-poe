@@ -1,0 +1,68 @@
+.header {
+  margin-top: 54px;
+  height: 55px;
+  padding-left: 160px;
+  background-color: #F9FBFC;
+  padding-top: 20px;
+  max-width: calc(920px - 160px);
+  padding-bottom: 20px;
+}
+.map-header {
+  margin-top: 54px;
+  height: 55px;
+  padding-left: 26px;
+  font-weight: 400;
+}
+.aside-panel {
+  width: 140px;
+  padding-top: 20px;
+  background-color: #F9FBFC;
+  height: 500px;
+  padding-left: 8px;
+}
+.container {
+  display: flex;
+  max-width: 920px;
+}
+
+.map {
+  max-width: 920px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.controls-section {
+  display: flex;
+  color: #787878;
+  flex-direction: column;
+}
+.aside-title {
+  color: #787878;
+  margin-bottom: 15px;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.example-radio-button:not(:last-child) {
+  margin-bottom: 12px;
+}
+
+.container-table {
+  margin-top: 20px;
+  flex: 1;
+  margin-left: 20px;
+}
+
+.action-button {
+  width: 110px;
+}
+.actions {
+  margin-top: 15px;
+  margin-bottom: 60px;
+}
+.action-button:first-child {
+  margin-right: 20px;
+}

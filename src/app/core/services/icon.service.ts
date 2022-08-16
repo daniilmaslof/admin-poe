@@ -7,6 +7,9 @@ import { DomSanitizer } from '@angular/platform-browser';
 const ICONS_NAME = [
   'eye',
   'create',
+  'delete',
+  'plus',
+  'close-eye',
   'activate',
   'add'
 ];

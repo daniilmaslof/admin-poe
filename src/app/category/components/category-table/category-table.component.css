@@ -1,0 +1,28 @@
+.mat-column-action {
+  max-width: 30px;
+}
+mat-header-row {
+  min-height: 50px;
+}
+
+.mat-column-name {
+  flex: 2;
+}
+
+.link-primary-button {
+  font-weight: 400;
+}
+
+.example-table {
+  max-height: 700px;
+  overflow: auto;
+}
+
+.mat-column-icon {
+  max-width: 30px;
+  margin-right: 10px;
+}
+.icon {
+  max-width: 30px;
+  object-fit: cover;
+}

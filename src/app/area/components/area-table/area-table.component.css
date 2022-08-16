@@ -1,0 +1,9 @@
+.example-table .mat-cell {
+  color: #6D6A60;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.mat-column-visibility {
+  max-width: 80px;
+}

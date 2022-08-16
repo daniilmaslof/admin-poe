@@ -1,5 +1,21 @@
 <div class="header">Select an object</div>
-<app-map class="map"></app-map>
+<ng-container *ngIf="allFloors$ | async as floors" [ngSwitch]="currentFloor$|async">
+  <app-sixth-floor [class.disabled-floor]="!floors[6].visible" *ngSwitchCase="floor.Seventh" class="map"></app-sixth-floor>
+  <app-ground-floor [class.disabled-floor]="!floors[0].visible"  *ngSwitchCase="floor.First" class="map"></app-ground-floor>
+  <app-second-floor [class.disabled-floor]="!floors[2].visible" *ngSwitchCase="floor.Third" class="map"></app-second-floor>
+  <app-seven-floor [class.disabled-floor]="!floors[7].visible" *ngSwitchCase="floor.Eighth" class="map"></app-seven-floor>
+  <app-first-floor [class.disabled-floor]="!floors[1].visible" *ngSwitchCase="floor.Second" class="map"></app-first-floor>
+  <app-third-floor [class.disabled-floor]="!floors[3].visible" *ngSwitchCase="floor.Fourth" class="map"></app-third-floor>
+  <app-fifth-floor [class.disabled-floor]="!floors[5].visible" *ngSwitchCase="floor.Sixth" class="map"></app-fifth-floor>
+  <app-fourth-floor [class.disabled-floor]="!floors[4].visible" *ngSwitchCase="floor.Fifth" class="map"></app-fourth-floor>
+
+  <ng-container *ngSwitchDefault>
+    <div class="default">
+      Select one floor to display.
+      <mat-icon class="eye">visibility</mat-icon>
+    </div>
+  </ng-container>
+</ng-container>
 <div class="legends">
   <div class="column">
     <div class="cell">

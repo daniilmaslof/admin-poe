@@ -1,0 +1,25 @@
+.container {
+  padding-left: 140px;
+  margin-top: 54px;
+  width: calc(100% - 140px);
+  max-width: 780px;
+  height: 100%;
+  flex-direction: column;
+  background-color: #F9FBFC;
+  display: flex;
+}
+
+.table {
+  flex: 1;
+}
+
+.plus-button {
+  color: #252423;
+}
+.header {
+  background-color: #F9FBFC;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+}

@@ -18,90 +18,136 @@
             [checked]="isEqualLocations(locations, selectedLocations)"
             class="header-item" color="primary">Choose all
           </mat-checkbox>
-        </ng-container>
-        <button class="button header-item" color="primary" mat-button aria-label="Create POI">
-          <mat-icon svgIcon="create"></mat-icon>
-          <span class="text-icon-color">
-            Create POI
-          </span>
-        </button>
-        <button class="button header-item" color="primary" mat-button aria-label="Create POI">
-          <mat-icon svgIcon="add"></mat-icon>
-          <span class="text-icon-color">
+          <button *ngIf="onlyLocations(selectedLocations$ | async)" (click)="addToPoi()" class="button header-item"
+                  color="primary" mat-button aria-label="Create POI">
+            <mat-icon svgIcon="add"></mat-icon>
+            <span class="text-icon-color">
             Add to POI
           </span>
-        </button>
-        <button (click)="activateSelectedLocations()" class="button header-item"
-                [color]="isAllActivated ? 'primary' : 'accent'" mat-button aria-label="Create POI">
-          <mat-icon svgIcon="activate"></mat-icon>
-          <span class="text-icon-color">
+          </button>
+          <button *ngIf="(selectedLocations$ | async)?.length" (click)="activateSelectedLocations()"
+                  class="button header-item"
+                  [color]="isAllActivated ? 'primary' : 'accent'" mat-button aria-label="Create POI">
+            <mat-icon svgIcon="activate"></mat-icon>
+            <span class="text-icon-color">
           Activate/Deactivate
           </span>
-        </button>
+          </button>
+        </ng-container>
       </div>
-      <div class="container">
-        <div class="filter-panel">
-          <div class="section">
-            <div class="columns-section">
-              <div class="column">
-                <div class="section-title">Floor</div>
-                <mat-radio-group formControlName="floor" color="primary" aria-labelledby="example-radio-group-label"
-                                 class="controls-section small-radio-group">
-                  <mat-radio-button class="example-radio-button"
-                                    *ngFor="let floor of floors"
-                                    [value]="floor">
-                    {{toReadableFloor(floor)}}
-                  </mat-radio-button>
-                </mat-radio-group>
+      <mat-table [dataSource]="['table']">
+        <ng-container matColumnDef="item">
+          <mat-cell *matCellDef="let transaction">
+            <div class="container">
+              <div class="filter-panel">
+                <div class="section">
+                  <div class="columns-section">
+                    <div class="column">
+                      <div class="section-title">Floor</div>
+                      <mat-radio-group formControlName="floor" color="primary"
+                                       aria-labelledby="example-radio-group-label"
+                                       class="controls-section small-radio-group">
+                        <mat-radio-button class="example-radio-button"
+                                          *ngFor="let floor of floors"
+                                          [value]="floor">
+                          {{toReadableFloor(floor)}}
+                        </mat-radio-button>
+                      </mat-radio-group>
+                    </div>
+                    <div class="column">
+                      <div class="section-title">Area</div>
+                      <div class="controls-section" formArrayName="aries">
+                        <mat-checkbox [formControlName]="i" color="primary"
+                                      *ngFor="let area of areas$ | async;let i = index">{{area}}</mat-checkbox>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="section">
+                  <div class="section-title">POI/Location</div>
+                  <mat-radio-group formControlName="locationFilter" color="primary"
+                                   aria-labelledby="example-radio-group-label" class="small-radio-group">
+                    <mat-radio-button class="example-radio-button"
+                                      *ngFor="let locationFilter of locationFilterCollection | keyvalue"
+                                      [value]="locationFilter.value">
+                      {{locationFilter.value}}
+                    </mat-radio-button>
+                  </mat-radio-group>
+                </div>
+                <div class="section categories-section">
+                  <div class="section-title">Category</div>
+                  <div class="controls-section" formArrayName="categories">
+                    <mat-checkbox [formControlName]="i" color="primary"
+                                  *ngFor="let category of categories$ | async;let i = index">{{category}}</mat-checkbox>
+                  </div>
+                </div>
               </div>
-              <div class="column">
-                <div class="section-title">Area</div>
-                <div class="controls-section" formArrayName="aries">
-                  <mat-checkbox [formControlName]="i" color="primary"
-                                *ngFor="let area of areas$ | async;let i = index">{{area}}</mat-checkbox>
+              <div class="container-table">
+                <mat-progress-bar mode="indeterminate" *ngIf="isLoading$ | async"></mat-progress-bar>
+                <app-location-table
+                  (activateLocation)="activateLocation($event)"
+                  (reloadData)="reload()"
+                  (sortChanged)="sortChanged($event)"
+                  *ngIf="(paginatedLocations$ | async)?.length else noItems"
+                  [locationsData]="paginatedLocations$ | async" class="table"
+                  [isAllExpanded]="false"></app-location-table>
+                <ng-template #noItems>
+                  <div class="no-items-row">
+                    There are no locations matching the search criteria.
+                  </div>
+                </ng-template>
+              </div>
+              <app-map-container class="map none-legends"></app-map-container>
+            </div>
+          </mat-cell>
+          <mat-footer-cell *matFooterCellDef>
+            <div class="footer-container">
+            <div class="row">
+              <app-paginator *ngIf="(paginationMetadata$ | async)?.totalCount" class="paginator item"
+                             (pageChange)="pageChange($event)"
+                             [metadata$]="paginationMetadata$"></app-paginator>
+              <div class="legends item">
+                <div class="legend-content">
+                <div class="column footer-column">
+                  <div class="cell">
+                    <div class="square poi"></div>
+                    <div class="title">POI</div>
+                  </div>
+                  <div class="cell">
+                    <div class="square location"></div>
+                    <div class="title">Locations</div>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="cell">
+                    <div class="square deactivated-location"></div>
+                    <div class="title">Deactivated locations</div>
+                  </div>
+                  <div class="cell">
+                    <div class="square selected-location"></div>
+                    <div class="title">Selected</div>
+                  </div>
+                </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="section">
-            <div class="section-title">POI/Location</div>
-            <mat-radio-group formControlName="locationFilter" color="primary"
-                             aria-labelledby="example-radio-group-label" class="small-radio-group">
-              <mat-radio-button class="example-radio-button"
-                                *ngFor="let locationFilter of locationFilterCollection | keyvalue"
-                                [value]="locationFilter.value">
-                {{locationFilter.value}}
-              </mat-radio-button>
-            </mat-radio-group>
-          </div>
-          <div class="section">
-            <div class="section-title">Category</div>
-            <div class="controls-section" formArrayName="categories">
-              <mat-checkbox [formControlName]="i" color="primary"
-                            *ngFor="let category of categories$ | async;let i = index">{{category}}</mat-checkbox>
+            <div class="row">
+              <div class="actions item" *ngIf="(touchedLocation$ | async)?.length">
+                <button [disabled]="isLoading$ | async" (click)="uploadLocation()" class="action-button save-button"
+                        mat-raised-button color="primary">SAVE
+                </button>
+                <button class="action-button" (click)="cancel()" mat-stroked-button color="primary">Cancel</button>
+              </div>
+              <div class="item"> </div>
             </div>
-          </div>
-        </div>
-        <app-location-table
-          (activateLocation)="activateLocation($event)"
-          (sortChanged)="sortChanged($event)"
-          *ngIf="(paginatedLocations$ | async)?.length else noItems"
-          [locationsData]="paginatedLocations$ | async" class="table"></app-location-table>
-        <ng-template #noItems>
-          <div class="no-items-row">
-            There are no locations matching the search criteria.
-          </div>
-        </ng-template>
-      </div>
-      <app-paginator *ngIf="(paginationMetadata$ | async)?.totalCount" class="paginator"
-                     (pageChange)="pageChange($event)"
-                     [metadata$]="paginationMetadata$"></app-paginator>
-      <div class="actions" *ngIf="(touchedLocation$ | async)?.length">
-        <button (click)="uploadLocation()" class="action-button save-button" mat-raised-button color="primary">SAVE</button>
-        <button class="action-button" (click)="cancel()" mat-stroked-button color="primary">Cancel</button>
-      </div>
+            </div>
+          </mat-footer-cell>
+        </ng-container>
+        <mat-row *matRowDef="let row; columns: ['item'];"></mat-row>
+        <mat-footer-row *matFooterRowDef=" ['item']; sticky: true">
+        </mat-footer-row>
+      </mat-table>
     </div>
-    <app-map-container class="map"></app-map-container>
   </div>
 </form>
 

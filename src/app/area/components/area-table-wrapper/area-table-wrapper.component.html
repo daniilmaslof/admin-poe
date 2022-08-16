@@ -1,0 +1,35 @@
+<div class="header">
+</div>
+<div class="container">
+  <div class="aside-panel">
+    <div class="aside-title">Floor</div>
+    <div class="column">
+      <mat-radio-group [formControl]="floorControl" color="primary" aria-labelledby="example-radio-group-label"
+                       class="controls-section small-radio-group">
+        <mat-radio-button class="example-radio-button"
+                          *ngFor="let floor of floors$ | async"
+                          [value]="floor.number">
+          {{toReadableFloor(floor.number)}}
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+  </div>
+  <div class="container-table">
+    <ng-container *ngIf="(areas$ | async)?.length else noAreas">
+      <app-area-table (changeVisibility)="changeAreaVisibility($event)" [data]="areas$ | async"></app-area-table>
+    </ng-container>
+    <ng-template #noAreas>
+      <div style="color: #6D6A60">
+        There are no areas on the current floor. Please choose another floor.
+      </div>
+    </ng-template>
+  </div>
+</div>
+<div class="actions">
+  <div class="actions" *ngIf="(touchedAreas$ | async)?.length">
+    <button [disabled]="isLoading$ | async" (click)="uploadAreas()" class="action-button save-button"
+            mat-raised-button color="primary">SAVE
+    </button>
+    <button class="action-button" (click)="cancel()" mat-stroked-button color="primary">Cancel</button>
+  </div>
+</div>

@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild } from '@angular/core';
+import { FloorTableWrapperComponent } from '../floor-table-wrapper/floor-table-wrapper.component';
 
 @Component({
   selector: 'app-floor',
@@ -8,9 +9,14 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 })
 export class FloorComponent implements OnInit {
 
+  @ViewChild(FloorTableWrapperComponent)
+  public floorTableWrapperComponent: FloorTableWrapperComponent
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  public canDeactivate() {
+    return this.floorTableWrapperComponent.canDeactivate()
+  }
 }

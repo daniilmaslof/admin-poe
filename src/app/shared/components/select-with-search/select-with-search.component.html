@@ -1,0 +1,14 @@
+<mat-form-field appearance="fill"  class="small-mat-form-field small-select select">
+  <mat-select [placeholder]="placeholder" panelClass="select-panel" [compareWith]="compareOption" [formControl]="selectFormControl">
+    <mat-option>
+      <ngx-mat-select-search placeholderLabel="Search" noEntriesFoundLabel="No data found" [formControl]="searchControl"></ngx-mat-select-search>
+    </mat-option>
+    <mat-option *ngFor="let option of filteredOptions$ | async" [value]="option">
+      <ng-container
+        *ngIf="optionTemplateRef"
+        [ngTemplateOutlet]="optionTemplateRef"
+        [ngTemplateOutletContext]="{ $implicit: option }">
+      </ng-container>
+    </mat-option>
+  </mat-select>
+</mat-form-field>

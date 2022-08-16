@@ -1,0 +1,71 @@
+<form [formGroup]="form">
+  <div class="dialog-title">
+    <ng-container *ngIf="!data else edit">
+      New Department
+    </ng-container>
+    <ng-template #edit>
+      Edit Department
+    </ng-template>
+  </div>
+  <div class="container">
+    <div class="title">
+      {{form.value?.name}}
+    </div>
+    <div class="form">
+      <div class="row">
+        <div class="cell name-cell big-cell">
+          <label class="label">Name</label>
+          <mat-form-field class="small-mat-form-field" appearance="outline">
+            <textarea formControlName="name" matTextareaAutosize matAutosizeMaxRows="3" matInput></textarea>
+          </mat-form-field>
+        </div>
+        <div class="cell">
+          <div class="small-row">
+              <div class="cell">
+                <label class="label">Id QMS</label>
+                <mat-form-field class="small-mat-form-field small-input" appearance="outline">
+                  <input formControlName="idQMS" matInput>
+                </mat-form-field>
+              </div>
+            <div class="cell">
+              <label class="label">Id HIS</label>
+              <mat-form-field class="small-mat-form-field small-input" appearance="outline">
+                <input formControlName="idHIS" matInput>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="cell reception-cell">
+          <label class="label">POI</label>
+          <app-select-with-search
+            class="form-control"
+            placeholder="Product"
+            formControlName="reception"
+            [options]="location$ | async"
+            [compareOption]="compareLoc"
+            [compareOptionWithSearchTerm]="compareLocationWithTerm">
+            <ng-template #optionTemplate let-location>
+              {{location.name}} ({{location.archId}})
+            </ng-template>
+          </app-select-with-search>
+
+        </div>
+        <div class="cell">
+          <label class="label">QMS SOW</label>
+          <mat-form-field class="small-mat-form-field small-input" appearance="outline">
+            <input formControlName="qmsSOW" matInput>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="actions">
+      <button [disabled]="isLoading$ | async" (click)="save()" class="action-button save-button" mat-raised-button color="primary">
+        <ng-container *ngIf="data else create">Save</ng-container>
+        <ng-template #create>Create</ng-template>
+      </button>
+      <button (click)="dialogRef.close()" mat-stroked-button class="action-button" color="primary">Cancel</button>
+    </div>
+  </div>
+</form>

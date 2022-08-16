@@ -1,0 +1,39 @@
+<div class="dialog-title">
+  POI selection
+</div>
+
+<div class="header">
+  <div class="title">{{name}}</div>
+  <div class="sub-title">{{archId}}</div>
+</div>
+
+<div class="content">
+  <mat-progress-bar mode="indeterminate" *ngIf="isLoading$ | async"></mat-progress-bar>
+  <mat-table *ngIf="locations$ | async as locations else noLocations" [dataSource]="locations">
+    <!-- Number Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell class="name" *matCellDef="let row">{{row.name}}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="archNumber">
+      <mat-header-cell *matHeaderCellDef>
+        Arch'l №
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.archId}}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row (click)="selectOption(row, i)" appHighlightableItem [item]="row" *matRowDef="let row; columns: displayedColumns;let i = index"></mat-row>
+  </mat-table>
+  <ng-template #noLocations>
+    <div class="no-locations">
+      This POI does not contain a location
+    </div>
+  </ng-template>
+</div>
+<div class="actions">
+  <button (click)="save()" [disabled]="isLoading$ | async" *ngIf="selectionModel.selected.length" mat-raised-button color="primary">Add</button>
+  <button (click)="dialogRef.close()" mat-stroked-button color="primary">Cancel</button>
+</div>

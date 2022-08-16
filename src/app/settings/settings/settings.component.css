@@ -1,0 +1,102 @@
+.header {
+  margin-top: 30px;
+  margin-left: 150px;
+  color: #000000;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.container {
+  margin-left: 150px;
+  padding-top: 20px;
+  background: #F9FBFC;
+  padding-right: 100px;
+  padding-left: 30px;
+  max-width: 700px;
+  min-height: 500px;
+}
+
+.grid {
+  max-width: 450px;
+}
+
+.header-table {
+  padding: 10px;
+  border-radius: 10px 10px 0 0;
+  border: 1px solid #CCCCCC;
+}
+.row:first-child {
+  border-left: 1px solid #CCCCCC;
+  border-right: 1px solid #CCCCCC;
+}
+
+.button-radio {
+  --accent-color: #00CC01;
+
+}
+.button-radio-accept .mat-radio-inner-circle {
+  background-color: #00CC01;
+}
+.row:last-child {
+  border: 1px solid #CCCCCC;
+  border-top: 0;
+  border-radius: 0 0 10px 10px;
+}
+.header-table, .row {
+  padding: 10px;
+  display: flex;
+}
+
+.header-table div, .row div {
+  min-width: 0;
+  flex: 1;
+}
+
+.header-table div:last-child, .row div:last-child {
+  min-width: 0;
+  flex: 3;
+}
+
+.small-mat-form-field.small-mat-form-field {
+  font-size: 5px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+}
+
+.item:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.suffix {
+  font-size: 14px;
+}
+
+.text {
+  margin-right: 20px;
+}
+
+.suffix {
+  margin-left: 20px;
+}
+
+.full-width {
+  flex: 1;
+}
+
+.small-control {
+  max-width: 100px;
+}
+
+.actions {
+  margin-top: 30px;
+  margin-left: auto;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.text.text {
+  display: block;
+}

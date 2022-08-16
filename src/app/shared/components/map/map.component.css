@@ -2,3 +2,21 @@
   width: 100%;
   height: auto;
 }
+:host {
+  display: block;
+  max-width: 550px;
+}
+
+.selected-location {
+  border: 20px solid black;
+  stroke: var(--selected-color);
+  stroke-width:4
+}
+
+.st0 {
+  cursor: pointer;
+}
+
+.disabled-location {
+  fill: #C4C4C4;
+}

@@ -1,0 +1,73 @@
+<div class="header">
+  Settings:
+</div>
+<form [formGroup]="form">
+  <div class="container">
+    <div class="item">
+      <div class="text">Greeting text:</div>
+      <mat-form-field class="full-width small-mat-form-field" appearance="outline">
+        <input formControlName="greetingText" matInput>
+      </mat-form-field>
+    </div>
+    <div class="item">
+      <div class="text">Kiosk IDLE Timeout (s):</div>
+      <mat-form-field class="small-mat-form-field small-control" appearance="outline">
+        <input type="number" formControlName="idleTimeInSeconds" matInput>
+      </mat-form-field>
+      <span class="suffix" matSuffix>sec</span>
+    </div>
+    <div class="item">
+      <div class="text">Kiosk log out Timeout (s):</div>
+      <mat-form-field class="small-mat-form-field small-control" appearance="outline">
+        <input type="number" formControlName="unloginTimeInSeconds" matInput>
+      </mat-form-field>
+      <span class="suffix" matSuffix>sec</span>
+    </div>
+    <div class="item">
+      <div class="text">Assistance IPPS Message</div>
+      <mat-form-field class="full-width small-mat-form-field" appearance="outline">
+        <input formControlName="sosMessage" matInput>
+      </mat-form-field>
+    </div>
+    <div class="item">
+      <div class="text">Show Assistance button in Quick panel:</div>
+
+      <mat-form-field class="full-width small-mat-form-field" appearance="outline">
+        <input formControlName="showQuickSearch" matInput>
+      </mat-form-field>
+    </div>
+    <div class="grid">
+      <div class="header-table">
+        <div>Kiosk Id</div>
+        <div>Status</div>
+        <div>Last response</div>
+      </div>
+      <div class="body">
+        <div class="row">
+          <div>Kiosk 1</div>
+          <div>
+            <mat-radio-group>
+              <mat-radio-button class="button-radio-accept" color="accent" value="2"
+                                [checked]="true"></mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div>{{monitoring$ | async | date: 'MMMM d, y h:mm a'}}</div>
+        </div>
+        <div class="row">
+          <div>Kiosk 2</div>
+          <div>
+            <mat-radio-group>
+              <mat-radio-button class="button-radio" value="1" tabIndex="-1" color="warn"
+                                [checked]="true"></mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+    <mat-progress-bar mode="indeterminate" *ngIf="loading$ | async"></mat-progress-bar>
+    <div class="actions">
+      <button (click)="submit()" mat-stroked-button color="primary">Submit</button>
+    </div>
+  </div>
+</form>

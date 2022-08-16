@@ -1,0 +1,46 @@
+<form [formGroup]="form">
+  <mat-table [dataSource]="data" class="without-border-width example-table">
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell [formGroupName]="i" class="name" *matCellDef="let row;let i = index">
+        <mat-checkbox formControlName="checked" color="primary"></mat-checkbox>
+      </mat-cell>
+    </ng-container>
+    <!-- Number Column -->
+    <ng-container matColumnDef="icon">
+      <mat-header-cell *matHeaderCellDef>Icon</mat-header-cell>
+      <mat-cell class="name" *matCellDef="let row">
+        <img onerror='this.style.display = "none"' class="icon" [src]="row.name | assets">
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell class="name" *matCellDef="let row">
+        <button (click)="openCategoryDialog(row)" class="link-primary-button">{{row.name}}</button>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Title Column -->
+    <ng-container matColumnDef="editable">
+      <mat-header-cell *matHeaderCellDef>Editable</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <div class="reception">{{row.editable ? 'YES': 'NO'}}</div>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="quickSearch">
+      <mat-header-cell *matHeaderCellDef>Quick search</mat-header-cell>
+      <mat-cell class="quickSearch" *matCellDef="let row;let i = index">
+        <mat-slide-toggle
+          #toggle
+          (change)="changeQuickSearch($event, row)"
+          [checked]="row.quickSearch"
+          color="primary">
+        </mat-slide-toggle>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</form>

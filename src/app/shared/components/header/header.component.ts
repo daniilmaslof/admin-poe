@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Route, Router } from '@angular/router';
 
 /**
  * Page info.
@@ -33,6 +34,17 @@ export class PageInfo {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
+
+
+  constructor(
+    public router: Router,
+  ) {
+  }
+
+  public logout() {
+    this.router.navigate(['/login']);
+    localStorage.clear();
+  }
   /**
    * List of navigation links for main screen.
    */
@@ -47,7 +59,7 @@ export class HeaderComponent {
     }),
     new PageInfo({
       title: 'Area',
-      url: 'area',
+      url: 'areas',
     }),
     new PageInfo({
       title: 'Department',

@@ -1,0 +1,229 @@
+:host {
+  width: 700px;
+  height: 350px;
+  display: block;
+}
+
+
+.dialog-title {
+  background: #F2F2F2;
+  height: 40px;
+  display: flex;
+  font-size: 14px;
+  color: #828282;
+  text-transform: uppercase;
+  font-weight: 500;
+  justify-content: center;
+  align-items: center;
+}
+.container {
+  padding: 20px 40px 30px 40px;
+
+}
+
+.title {
+  font-weight: 500;
+  font-size: 24px;
+}
+
+.form {
+  margin-top: 38px;
+  min-height: 130px;
+}
+
+.cell {
+  display: flex;
+  flex-direction: column;
+}
+
+.small-row {
+  display: flex;
+}
+.small-row > :first-child {
+  margin-right: 40px;
+}
+
+.row {
+  display: flex;
+}
+
+.big-cell {
+  flex: 2;
+  min-width: 0;
+}
+
+.cell {
+  min-width: 0;
+  flex: 1;
+}
+.name-cell {
+  margin-right: 65px;
+}
+
+.reception-cell {
+  margin-right: 65px;
+}
+
+.form {
+  margin-bottom: 40px;
+}
+
+.action-button {
+  min-width: 110px;
+  height: 32px;
+}
+
+.save-button {
+  color: white;
+}
+.action-button:first-child {
+  margin-right: 20px;
+}
+
+.big-cell {
+  max-width: 300px;
+}
+:host {
+  width: 700px;
+  height: 440px;
+  display: block;
+}
+
+.content {
+  height: calc(440px - 130px - 50px);
+}
+.mat-column-archNumber {
+  flex: 1;
+}
+.mat-column-isActivate{
+
+}
+.row {
+  display: flex;
+}
+
+.section {
+  width: calc(100%);
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  color: #BDBDBD;
+  font-size: 12px;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+
+.title {
+  font-size: 24px;
+  margin-bottom: 2px;
+  font-weight: 500;
+}
+
+.section {
+  margin: 10px 0 42px;
+}
+
+.circle {
+  background: #6495ED;
+  width: 10px;
+  margin-right: 4px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.content {
+  margin: 20px 26px;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+.sub-title {
+  color: #BDBDBD;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.section .row {
+  display: flex;
+}
+.item {
+  flex: 1;
+}
+.item:first-child {
+  margin-right: 40px;
+}
+
+.row:first-child {
+  margin-bottom: 10px;
+}
+
+.image {
+  width: 85px;
+  height: 85px;
+}
+.default-image {
+  width: 85px;
+  height: 85px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #CCCCCC;
+}
+
+.image-button {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.action-button {
+  width: 110px;
+  height: 32px;
+}
+.actions {
+  margin-left: 40px;
+}
+.table {
+  max-height: 100%;
+}
+.section {
+  max-height: 240px;
+  overflow: auto;
+}
+.save-button {
+  color: white;
+}
+.action-button:first-child {
+  margin-right: 20px;
+}
+
+.no-locations {
+  text-align: center;
+}
+.table-title {
+  margin-left: 20px;
+}
+.footer {
+  display: flex;
+  margin: 0 40px;
+  justify-content: space-between;
+}
+.mat-column-isActivate {
+  max-width: 40px;
+}
+.mat-column-remove {
+  max-width: 20px;
+}
+
+.actions {
+  display: flex;
+}
+.create {
+  width: auto;
+}

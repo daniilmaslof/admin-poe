@@ -12,7 +12,7 @@ export enum Floor {
 }
 
 /**
- * Floor
+ * FloorModel
  */
 export namespace Floor {
 
@@ -44,6 +44,18 @@ export namespace Floor {
     [Floor.All]: 'All',
   };
 
+  const fullReadableFloor: Record<Floor, string> = {
+    [Floor.First]: 'Ground floor',
+    [Floor.Second]: '1th floor',
+    [Floor.Third]: '2th floor',
+    [Floor.Fourth]: '3th floor',
+    [Floor.Fifth]: '4th floor',
+    [Floor.Sixth]: '5th floor',
+    [Floor.Seventh]: '6th floor',
+    [Floor.Eighth]: '7th floor',
+    [Floor.All]: 'All',
+    [Floor.Ninth]: '8th floor',
+  };
   /**
    * Get user-friendly representation of a content type.
    * @param value The content type.
@@ -52,4 +64,8 @@ export namespace Floor {
   export function toReadable(value: Floor): string {
     return readableFloor[value];
   }
+  export function toFullReadable(value: Floor): string {
+    return fullReadableFloor[value];
+  }
+
 }

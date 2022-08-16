@@ -1,0 +1,40 @@
+<div class="container">
+  <mat-progress-bar mode="indeterminate" *ngIf="isLoading$ | async"></mat-progress-bar>
+  <ng-container *ngIf="departments$ | async as departments">
+    <div class="header">
+      <mat-checkbox
+        *ngIf="departments.length"
+        (change)="chooseAll($event.checked, departments)"
+        [checked]="(selectedDepartments$ | async).length === departments.length"
+        class="header-item" color="primary">Choose all
+      </mat-checkbox>
+      <button
+        color="accent"
+        (click)="openDepartmentDialog()"
+        class="button plus-button"
+        mat-button aria-label="Remove POI">
+        <mat-icon svgIcon="plus"></mat-icon>
+        <span class="text-icon-color">
+          New department
+          </span>
+      </button>
+      <button
+        color="primary"
+        (click)="removeDepartment()"
+        *ngIf="(selectedDepartments$ | async)?.length"
+        class="button header-item"
+        mat-button aria-label="Remove POI">
+        <mat-icon svgIcon="delete"></mat-icon>
+        <span class="text-icon-color">
+          Delete
+          </span>
+      </button>
+    </div>
+    <app-department-table
+      (changeSelectedDepartments)="selectedDepartments$.next($event)"
+      [selectedDepartments]="selectedDepartments$ | async"
+      class="table"
+      (reload)="reload()"
+      [departments]="departments"></app-department-table>
+  </ng-container>
+</div>

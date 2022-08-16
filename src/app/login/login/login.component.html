@@ -1,0 +1,34 @@
+<div>
+  <div class="logo-container">
+    <img class="image" src="/assets/MKCC%20LOGO-01-01%201.png" alt="Logo">
+  </div>
+  <h2 class="login-page-header">Account Login</h2>
+  <form class="login-form" [formGroup]="loginForm" (ngSubmit)="submit()">
+    <div *ngIf="formError" class="error form-error">{{ formError }}</div>
+    <div class="cell">
+      <label class="label">Login</label>
+      <mat-form-field class="small-mat-form-field small-input" appearance="outline">
+        <input formControlName="email" matInput>
+      </mat-form-field>
+      <app-validation-messages [control]="loginForm.get('email')"></app-validation-messages>
+    </div>
+    <div class="cell">
+      <label class="label">Password</label>
+      <mat-form-field class="small-mat-form-field small-input" appearance="outline">
+        <input
+          formControlName="password"
+          matInput
+          type="password"
+          required
+          autocomplete="current-password"
+          placeholder="Password*">
+      </mat-form-field>
+        <app-validation-messages [control]="loginForm.get('password')"></app-validation-messages>
+    </div>
+    <div class="actions">
+      <button [disabled]="login$ | async" (click)="submit()" class="action-button save-button" mat-raised-button color="primary">
+        Sign In
+      </button>
+    </div>
+  </form>
+</div>

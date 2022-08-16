@@ -1,0 +1,20 @@
+<div class="title">
+  You can upload picture
+</div>
+<div class="sub-title">
+  The largest single-file support to 5 MB
+</div>
+<div class="error-container" *ngIf="errorStream$ | async as error">{{error}}</div>
+<app-uploader (filesDropped)="uploadFiles($event)" class="uploader">
+  <div class="files-container">
+    <app-file
+      *ngIf="attachFile$ | async as fileModel"
+      [file]="fileModel"
+      (uploadCompleted)="addUploadedFile($event)"
+      (removeFile)="removeFile()" class="file-wrapper">
+    </app-file>
+  </div>
+</app-uploader>
+<div class="actions">
+  <button class="button" mat-stroked-button (click)="close()" color="primary">Cancel</button>
+</div>

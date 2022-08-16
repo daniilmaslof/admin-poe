@@ -1,14 +1,15 @@
 .container {
   padding-left: 140px;
+  padding-top: 55px;
   width: calc(100% - 140px);
-  height: 100%;
+  max-width: 920px;
+  height: 500px;
   background-color: #F9FBFC;
   display: flex;
 }
 
 .table {
   flex: 1;
-  margin-right: 20px;
 }
 
 .header {
@@ -18,4 +19,15 @@
   display: flex;
   align-items: center;
   padding-left: 160px;
+}
+
+.action-button {
+  width: 110px;
+}
+.actions {
+  margin-top: 15px;
+  margin-bottom: 60px;
+}
+.action-button:first-child {
+  margin-right: 20px;
 }

@@ -1,7 +1,8 @@
 .header {
   background-color: #F9FBFC;
   width: calc(100% - 160px);
-  height: 55px;
+  min-height: 37px;
+  flex-wrap: wrap;
   display: flex;
   align-items: center;
   padding-left: 160px;
@@ -9,6 +10,10 @@
 .example-radio-group, .controls-section {
   display: flex;
   flex-direction: column;
+}
+.search-button {
+  height: 37.5px;
+  margin-bottom: 10px;
 }
 .section-title {
   font-weight: 500;
@@ -48,12 +53,11 @@
   display: flex;
 }
 
-.table {
+.container-table {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-self: auto;
-  justify-content: space-between;
   width: calc(100% - 140px);
 }
 
@@ -68,6 +72,9 @@
 
 .search-header {
   display: flex;
+  position: absolute;
+  top: 55px;
+  left: 137.5px;
 }
 .search-button {
   align-self: flex-start;
@@ -97,7 +104,9 @@
   font-size: 16px;
 }
 .header-item:not(:first-child) {
-  margin-left: 25px;
+  padding-right: 0;
+  padding-left: 0;
+  margin-left: 20px;
 }
 .save-button {
   color: white;
@@ -106,8 +115,86 @@
   width: 110px;
 }
 .actions {
-  margin-top: 25px;
 }
 .action-button:first-child {
   margin-right: 20px;
+}
+.container {
+  width: 100%;
+}
+.categories-section {
+  height: 300px;
+  overflow: auto;
+}
+
+.legends, .legend-content {
+  display: flex;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+}
+.footer-column:first-child {
+  margin-right: 80px;
+}
+.cell:not(:first-child) {
+  margin-top: 8px;
+}
+.cell {
+  display: flex;
+}
+.poi {
+  background-color: var(--primary-color);
+}
+.location {
+  background-color: var(--accent-color);
+}
+
+.deactivated-location {
+  background-color: var(--disable-color);
+}
+
+.selected-location {
+  background-color: var(--selected-color);
+}
+.square {
+  margin-right: 8px;
+  width: 20px;
+  height: 20px;
+}
+
+.row {
+  display: flex;
+  min-width: 100%;
+}
+
+mat-cell.mat-cell:last-of-type, mat-header-cell.mat-header-cell:last-of-type, mat-footer-cell.mat-footer-cell:last-of-type {
+  padding: 0;
+}
+
+.row .item {
+  flex: 1;
+}
+.legends {
+  padding-left: 60px;
+}
+
+.footer-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.row:first-child {
+  margin-top: 10px;
+}
+.legend-content {
+}
+
+.paginator {
+  justify-content: flex-start;
+}
+.footer-container {
+  margin-left: 140px;
+  min-height: 100px;
 }

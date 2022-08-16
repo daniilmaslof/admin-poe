@@ -7,6 +7,93 @@
   $warn: map-get($theme, warn);
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
+  .mat-stroked-button.mat-primary {
+    border: 1.3px solid #6495ED;
+  }
+
+  .button-radio-accept .mat-radio-inner-circle,  {
+    background-color: #00CC01!important;
+  }
+  .button-radio-accept .mat-radio-outer-circle {
+    border-color: #00CC01!important;
+  }
+  .link-primary-button {
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    overflow: visible;
+    cursor: pointer;
+    background: transparent;
+    color: mat-color($primary, 500);
+    font-weight: bold;
+    line-height: normal;
+    -webkit-font-smoothing: inherit;
+    -moz-osx-font-smoothing: inherit;
+
+    &::-moz-focus-inner {
+      border: 0;
+      padding: 0;
+    }
+
+    -webkit-appearance: none;
+  }
+  .without-border-width {
+    mat-row, mat-header-row, mat-footer-row {
+      border-bottom-width: 0;
+    }
+  }
+  .mat-dialog-container.mat-dialog-container {
+    padding: 0;
+    border-radius: 0;
+  }
+  .small-mat-form-field.small-mat-form-field {
+    font-size: 10px;
+
+    &.mat-form-field-appearance-fill .mat-form-field-flex {
+      background-color: #E9F4F8;
+    }
+
+    .mat-select-value-text {
+      font-size: 14px;
+    }
+
+    .mat-input-element.mat-input-element {
+      font-size: 14px;
+      min-height: 16px;
+    }
+  }
+  .small-input.small-input.small-input {
+    font-size: 5px;
+  }
+  .small-select.small-select.small-select {
+    font-size: 6px;
+
+    .mat-select {
+      line-height: 14px;
+    }
+
+    .mat-select-arrow-wrapper {
+      transform: translateY(0);
+    }
+  }
+  .mat-form-field-appearance-outline .mat-form-field-outline-start, .mat-form-field-appearance-outline .mat-form-field-outline-end {
+    color: #CCCCCC;
+  }
+  .mat-form-field-label-wrapper {
+    font-size: 14px;
+    color: #252423;
+    font-weight: 400;
+  }
+  .mat-row, .mat-footer-row {
+    min-height: 45px;
+  }
+  .mat-select-panel {
+    font-size: 14px !important;
+  }
+  .mat-select {
+
+  }
 
   .no-items-row {
     background-color: mat-color($primary, 50);
@@ -73,5 +160,155 @@
 
   .mat-header-cell {
     color: black;
+  }
+
+  .in-progress-overlay {
+    display: none;
+  }
+
+  .is-in-progress {
+    position: relative;
+
+    .in-progress-overlay {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.6);
+      z-index: 50;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  .selectable {
+    cursor: pointer;
+  }
+
+  .mat-raised-button.mat-primary {
+    color: white;
+  }
+  .selected {
+    background: #EFF5FB;
+  }
+
+  ::-webkit-scrollbar {
+    height: 5px;
+    width: 5px;
+    border-radius: 2.5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    border-radius: 2.5px;
+    background-color: #F2F2F2;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #6495ED;
+    border-radius: 2.5px !important;
+  }
+
+  mat-cell.mat-cell:first-of-type, mat-header-cell.mat-header-cell:first-of-type, mat-footer-cell.mat-footer-cell:first-of-type {
+    padding-left: 20px;
+  }
+  mat-cell.mat-cell:last-of-type, mat-header-cell.mat-header-cell:last-of-type, mat-footer-cell.mat-footer-cell:last-of-type {
+    padding-right: 20px;
+  }
+
+  .label {
+    color: #BDBDBD;
+    font-size: 12px;
+    font-weight: 400;
+    margin-bottom: 2px;
+  }
+  .mat-slide-toggle.is-poi.mat-checked {
+    .mat-slide-toggle-bar {
+      background-color: rgba(20, 157, 103, 0.44)
+    }
+
+    .mat-slide-toggle-thumb {
+      background-color: rgb(20, 157, 103)
+    }
+  }
+  .mat-stroked-button, .mat-raised-button {
+    line-height: 32px !important;
+  }
+  .mat-error {
+    font-size: 0.75rem;
+  }
+  .mat-form-field-wrapper {
+    padding-bottom: 0 !important;
+  }
+  .selected-location.selected-location.selected-location {
+    fill: var(--selected-color);
+  }
+
+  .st0 {
+    cursor: pointer;
+  }
+
+  .disabled-floor .st0 {
+    fill: #BDBDBD;
+    stroke: #000000;
+  }
+
+  .disabled-area {
+    fill: #BDBDBD;
+    stroke: #000000;
+  }
+
+  .disabled-location.disabled-location {
+    fill: #C4C4C4;
+  }
+  .mat-form-field-appearance-fill .mat-form-field-underline::before {
+    height: 0 !important;
+  }
+  .mat-form-field-appearance-fill .mat-form-field-ripple {
+    height: 0 !important;
+  }
+  .st0 {
+    fill: #418369;
+    stroke: #71e5b5;
+    stroke-width: 0.5;
+  }
+
+  .text {
+    display: none;
+  }
+  .area-map {
+    .st0 {
+      fill: #828181;
+      stroke: #71e5b5;
+      stroke-width: 0.5;
+    }
+
+    .disabled-location {
+      fill: #C4C4C4;;
+    }
+
+    .text {
+      display: block;
+      fill: white;
+    }
+  }
+  .area-map.disable-area-a {
+    .st0.isAreaA {
+      fill: #C4C4C4;
+      stroke: black;
+    }
+
+    .text.a {
+      fill: black;
+    }
+  }
+  .area-map.disable-area-b .b {
+    fill: black;
+  }
+  .area-map.disable-area-c .c {
+    fill: black;
+  }
+  .area-map.disable-area-d .d {
+    fill: black;
   }
 }

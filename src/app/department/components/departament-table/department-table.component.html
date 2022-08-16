@@ -1,0 +1,28 @@
+<form [formGroup]="form">
+  <mat-table [dataSource]="data" class="without-border-width example-table">
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell [formGroupName]="i" class="name" *matCellDef="let row;let i = index">
+        <mat-checkbox formControlName="checked" color="primary"></mat-checkbox>
+      </mat-cell>
+    </ng-container>
+    <!-- Number Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell class="name" *matCellDef="let row">
+        <button (click)="openDepartmentDialog(row)" class="link-primary-button">{{row.name}}</button>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Title Column -->
+    <ng-container matColumnDef="reception">
+      <mat-header-cell *matHeaderCellDef>POI</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <div class="reception">{{row.reception}}</div>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</form>

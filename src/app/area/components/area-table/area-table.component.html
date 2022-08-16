@@ -1,0 +1,26 @@
+<mat-table [dataSource]="data" class="without-border-width example-table">
+  <!-- Number Column -->
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+    <mat-cell class="name" *matCellDef="let row">
+      <div>{{row.name}}</div>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Title Column -->
+  <ng-container matColumnDef="visibility">
+    <mat-header-cell *matHeaderCellDef>Visibility</mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <div class="reception">
+        <button (click)="openVisibilityDialog(row)" mat-icon-button>
+          <mat-icon color="primary" *ngIf="row.visible" svgIcon="eye"></mat-icon>
+          <mat-icon *ngIf="!row.visible" svgIcon="close-eye"></mat-icon>
+        </button>
+      </div>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+

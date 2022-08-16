@@ -1,7 +1,10 @@
-<div class="header">
-  <mat-checkbox color="primary">Choose all</mat-checkbox>
-</div>
 <div class="container">
   <div class="aside-panel"></div>
-  <app-floor-table class="table"></app-floor-table>
+  <app-floor-table (toggleFloor)="changeFloorVisibility($event)" [floors]="floors$ | async" class="table"></app-floor-table>
+</div>
+<div class="actions" *ngIf="(touchedFloors$ | async)?.length">
+  <button [disabled]="isLoading$ | async" (click)="uploadFloors()" class="action-button save-button"
+          mat-raised-button color="primary">SAVE
+  </button>
+  <button class="action-button" (click)="cancel()" mat-stroked-button color="primary">Cancel</button>
 </div>

@@ -1,0 +1,186 @@
+<form [formGroup]="form">
+  <mat-tab-group [class.location]="!form.value.poi" mat-align-tabs="start">
+    <mat-tab [label]="form.value.poi ? 'POI' : 'Location'">
+      <div class="content">
+        <div class="header">
+          <div class="row">
+            <div class="circle"></div>
+            <div class="title">
+              {{form.value.name}}
+            </div>
+          </div>
+          <div class="sub-title">
+            {{data.location.archId2}}
+
+
+          </div>
+        </div>
+        <div class="section">
+          <mat-progress-bar mode="indeterminate" *ngIf="isLoading$ | async"></mat-progress-bar>
+          <div class="row">
+            <div class="item">
+              <label class="label">ArchId</label>
+              <mat-form-field class="small-mat-form-field" appearance="outline">
+                <textarea matTextareaAutosize matAutosizeMaxRows="2" formControlName="archId2" matInput></textarea>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="item">
+              <label class="label">Area</label>
+              <mat-form-field class="small-mat-form-field" appearance="outline">
+                <textarea matTextareaAutosize matAutosizeMaxRows="2" formControlName="area" matInput></textarea>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="item">
+              <label class="label">Name</label>
+              <mat-form-field class="small-mat-form-field" appearance="outline">
+                <textarea matTextareaAutosize matAutosizeMaxRows="2" formControlName="name" matInput></textarea>
+              </mat-form-field>
+            </div>
+
+            <div class="item">
+              <label class="label">Category</label>
+              <mat-form-field class="small-mat-form-field" appearance="fill">
+                <mat-select [compareWith]="compareCategory" formControlName="category">
+                  <mat-option *ngFor="let category of categories$ | async" [value]="category">
+                    {{category.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="item">
+              <label class="label">Description</label>
+              <mat-form-field class="small-mat-form-field" appearance="outline">
+                <textarea matTextareaAutosize matAutosizeMaxRows="3" formControlName="description" matInput></textarea>
+              </mat-form-field>
+            </div>
+
+            <div class="item">
+              <ng-container>
+                <label class="label">Photo</label>
+                <button (click)="openUploadPhotoDialog()" class="image-button link-primary-button">
+                  <img class="image" *ngIf="form.value.photo else defaultPhoto" [src]="form.value.photo">
+                  <ng-template #defaultPhoto>
+                    <div class="default-image">
+                      Upload photo
+                    </div>
+                  </ng-template>
+                  <button (click)="$event.preventDefault();$event.stopPropagation();form.patchValue({photo: null})"
+                          mat-icon-button color="warn" class="remove-photo">
+                    <mat-icon svgIcon="delete"></mat-icon>
+                  </button>
+                </button>
+              </ng-container>
+            </div>
+          </div>
+          <ng-template [ngIf]="!form.value.poi">
+            <div class="row item">
+              <label class="label">POI</label>
+              <div class="poi">
+                <app-select-with-search
+                  class="form-control poi-select"
+                  placeholder="Product"
+                  formControlName="selectedPoi"
+                  [options]="pois$ | async"
+                  [compareOption]="compareWithPoi"
+                  [compareOptionWithSearchTerm]="compareLocationWithTerm">
+                  <ng-template #optionTemplate let-location>
+                    {{location.name}} ({{location.archId}})
+                  </ng-template>
+                </app-select-with-search>
+<!--                <button *ngIf="form.value.selectedPoi" color="warn" class="clear-poi" (click)="clearPoi()" color="primary" mat-icon-button>-->
+<!--                  <mat-icon color="warn" svgIcon="delete"></mat-icon>-->
+<!--                </button>-->
+              </div>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab *ngIf="form.value.poi" label="Locations">
+      <div class="content">
+        <div class="header">
+          <div class="row">
+            <div class="circle"></div>
+            <div class="title">
+              {{form.value.name}}
+            </div>
+          </div>
+          <div class="sub-title">
+            {{data.location.archId}}
+          </div>
+        </div>
+        <div class="section">
+          <mat-progress-bar mode="indeterminate" *ngIf="isLoading$ | async"></mat-progress-bar>
+          <mat-table *ngIf="form.value?.locations?.length else noLocations" [dataSource]="form.value.locations">
+            <!-- Number Column -->
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+              <mat-cell class="name" *matCellDef="let row">{{row.name}}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="archNumber">
+              <mat-header-cell *matHeaderCellDef>
+                Arch'l №
+              </mat-header-cell>
+              <mat-cell *matCellDef="let row">{{row.archId}}</mat-cell>
+            </ng-container>
+
+            <!-- State Column -->
+            <ng-container matColumnDef="isActivate">
+              <mat-header-cell *matHeaderCellDef></mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                <mat-slide-toggle
+                  (change)="row.active = $event.checked"
+                  color="primary"
+                  class="is-poi"
+                  [checked]="row.active">
+                </mat-slide-toggle>
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="remove">
+              <mat-header-cell *matHeaderCellDef></mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                <button (click)="removeLocation(row)" color="primary" mat-icon-button>
+                  <mat-icon svgIcon="delete"></mat-icon>
+                </button>
+              </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+          <ng-template #noLocations>
+            <div class="no-locations">
+              This POI does not contain a location
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+  <div class="footer">
+    <div class="actions">
+      <button [disabled]="isLoading$ | async" (click)="save()" class="action-button save-button" mat-raised-button
+              color="primary">SAVE
+      </button>
+      <button (click)="dialogRef.close()" mat-stroked-button class="action-button" color="primary">Cancel</button>
+    </div>
+    <button (click)="form.patchValue({poi: false})" *ngIf="form.value.poi else createPoi" mat-stroked-button
+            color="warn">
+      <mat-icon svgIcon="delete"></mat-icon>
+      Delete Poi
+    </button>
+    <ng-template #createPoi>
+      <button class="action-button create" (click)="form.patchValue({poi: true})" mat-stroked-button color="primary">
+        <mat-icon svgIcon="create"></mat-icon>
+        Create Poi
+      </button>
+    </ng-template>
+  </div>
+</form>

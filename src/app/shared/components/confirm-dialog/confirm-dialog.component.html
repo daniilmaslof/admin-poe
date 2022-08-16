@@ -1,0 +1,10 @@
+<div class="container">
+  <div class="header">
+    <div class="title">{{data.title}}</div>
+    <div class="sub-title">{{data.subtitle}}</div>
+  </div>
+  <div class="actions">
+    <button (click)="dialogRef.close(true)" class="button" mat-raised-button [color]="data.buttonColor ? 'primary' : 'warn'">{{data.buttonText ? data.buttonText : 'Delete'}}</button>
+    <button (click)="dialogRef.close(false)" mat-stroked-button color="primary">Cancel</button>
+  </div>
+</div>
