@@ -10,7 +10,12 @@ mat-header-row {
 }
 
 .link-primary-button {
-  font-weight: 400;
+  font-weight: 400; 
+}
+
+.link-primary-button:disabled {
+  cursor: default;
+  color: #000;
 }
 
 .example-table {

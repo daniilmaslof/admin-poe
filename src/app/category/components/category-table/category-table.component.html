@@ -16,7 +16,7 @@
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
       <mat-cell class="name" *matCellDef="let row">
-        <button (click)="openCategoryDialog(row)" class="link-primary-button">{{row.name}}</button>
+         <button (click)="openCategoryDialog(row)" [disabled]="!row.editable" class="link-primary-button">{{row.name}}</button>
       </mat-cell>
     </ng-container>
 
