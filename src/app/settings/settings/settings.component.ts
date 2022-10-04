@@ -18,6 +18,7 @@ export class SettingsComponent implements OnInit {
     sosMessage: '',
     unloginTimeInSeconds: '',
     idleTimeInSeconds: '',
+    dataUpdateTimeInSeconds: '',
     showQuickSearch: '',
   });
 
@@ -35,6 +36,7 @@ export class SettingsComponent implements OnInit {
       greetingText: settings.greetingText,
       sosMessage: settings.sosMessage,
       unloginTimeInSeconds: settings.unloginTimeInSeconds,
+      dataUpdateTimeInSeconds: settings.dataUpdateTimeInSeconds,
       showQuickSearch: settings.showQuickSearch,
       idleTimeInSeconds: settings.idleTimeInSeconds,
     }))

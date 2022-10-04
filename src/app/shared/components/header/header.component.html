@@ -15,13 +15,11 @@
     </button>
   </div>
   <div class="links">
-    <button  [matMenuTriggerFor]="menu" class="link-button" color="primary" mat-icon-button aria-label="Admin">
+    <button class="link-button" color="primary" mat-icon-button aria-label="Admin">
       <mat-icon>person</mat-icon>
-      Admin
+      {{login | async}}
     </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="logout();">Logout</button>
-    </mat-menu>
+    <button class="logout-button" color="primary" mat-icon-button (click)="logout();">Log Out</button>
   </div>
 </div>
 

@@ -33,8 +33,8 @@ export class AuthService {
   }
 
   public login(email: string, password: string): Observable<void> {
-    return this.httpClient.post<any>(`${this.appConfigService.apiUrl}/login`,{ login: email, password, rememberMe: true}).pipe(
-      switchMap(token => this.tokenService.setToken$({token: token.id_token})),
+    return this.httpClient.post<any>(`${this.appConfigService.apiUrl}/login`, { login: email, password, rememberMe: true}).pipe(
+      switchMap(token => this.tokenService.setToken$({token: token.id_token, login: email})),
       mapTo(null),
     );
   }

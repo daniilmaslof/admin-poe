@@ -29,6 +29,11 @@
 .link-button {
   min-width: 50px;
   font-size: 12px;
+
+  cursor: default;
+}
+.logout-button {
+  text-decoration: underline;
 }
 .link-button:first-child {
   margin-right: 15px;
@@ -36,6 +41,9 @@
 .links {
   align-self: flex-end;
   margin-left: auto;
+
+  display: flex;
+  flex-direction: column;
 }
 .link-button {
   height: 36px;

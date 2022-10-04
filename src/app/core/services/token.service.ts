@@ -70,8 +70,10 @@ export class TokenService {
 export class AuthorizationToken {
   /** API access token. */
   public token: string;
+  public login: string;
 
   constructor(init: Partial<AuthorizationToken>) {
     this.token = init.token;
+    this.login = init.login;
   }
 }

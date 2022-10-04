@@ -3,6 +3,7 @@ export class Settings {
 
   sosMessage: string;
   unloginTimeInSeconds: string;
+  dataUpdateTimeInSeconds: string;
   idleTimeInSeconds: string;
   showQuickSearch: string;
   constructor(data: Partial<Settings>) {
@@ -11,5 +12,6 @@ export class Settings {
     this.unloginTimeInSeconds = data.unloginTimeInSeconds;
     this.sosMessage = data.sosMessage;
     this.idleTimeInSeconds = data.idleTimeInSeconds;
+    this.dataUpdateTimeInSeconds = data.dataUpdateTimeInSeconds;
   }
 }

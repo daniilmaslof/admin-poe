@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Route, Router } from '@angular/router';
+import { map } from 'rxjs/operators';
+import { TokenService } from 'src/app/core/services/token.service';
 
 /**
  * Page info.
@@ -38,6 +40,7 @@ export class HeaderComponent {
 
   constructor(
     public router: Router,
+    private tokenService: TokenService,
   ) {
   }
 
@@ -45,6 +48,7 @@ export class HeaderComponent {
     this.router.navigate(['/login']);
     localStorage.clear();
   }
+  public login = this.tokenService.token$.pipe(map(token => token.login))
   /**
    * List of navigation links for main screen.
    */

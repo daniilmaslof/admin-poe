@@ -21,6 +21,7 @@ export class SettingsService {
       map(data => new Settings({
         greetingText: data?.greetingText ?? '',
         unloginTimeInSeconds: data?.unloginTimeInSeconds ?? '',
+        dataUpdateTimeInSeconds: data?.dataUpdateTimeInSeconds ?? '',
         sosMessage: data?.sosMessage ?? '',
         showQuickSearch: data?.showQuickSearch ?? '',
         idleTimeInSeconds: data?.idleTimeInSeconds ?? ''
